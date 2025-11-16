@@ -1,0 +1,44 @@
+stages:
+  - build
+
+variables:
+  DOCKER_TLS_CERTDIR: ""
+
+# === Build du backend uniquement ===
+build_backend:
+  stage: build
+  image: docker:24
+  services:
+    - docker:dind
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker build -t registry.gitlab.com/najehch/surveypro/backend:latest ./surveypro-backend
+    - docker push registry.gitlab.com/najehch/surveypro/backend:latest
+  only:
+    - main
+
+# === Build du backoffice ===
+build_backoffice:
+  stage: build
+  image: docker:24
+  services:
+    - docker:dind
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker build -t registry.gitlab.com/najehch/surveypro/backoffice:latest ./surveypro-backoffice
+    - docker push registry.gitlab.com/najehch/surveypro/backoffice:latest
+  only:
+    - main
+
+# === Build du frontoffice ===
+build_frontoffice:
+  stage: build
+  image: docker:24
+  services:
+    - docker:dind
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker build -t registry.gitlab.com/najehch/surveypro/frontoffice:latest ./surveypro-frontoffice
+    - docker push registry.gitlab.com/najehch/surveypro/frontoffice:latest
+  only:
+    - main

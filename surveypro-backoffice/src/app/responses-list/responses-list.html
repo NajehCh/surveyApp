@@ -1,0 +1,41 @@
+<div class="container">
+ <div class="title-email">
+   <h1>Liste des réponses</h1>
+   <p>Voir toutes les réponses soumises pour vos enquêtes</p>
+ </div>
+
+ <!-- Champ de recherche -->
+ <div class="search-container">
+   <input 
+     type="text" 
+     placeholder="Rechercher par enquête ou email..."
+     [(ngModel)]="searchTerm"
+     (input)="filterResponses()"
+     class="search-input"
+   />
+ </div>
+
+ <div *ngIf="!(filteredResponses?.length)" class="no-results">
+   🔄 Aucun résultat trouvé.
+ </div>
+
+ <ul *ngIf="filteredResponses?.length" class="email-list">
+   <li *ngFor="let r of filteredResponses" class="email-item" (click)="toggleResponse(r)">
+     <div class="email-info">
+       <strong>{{ getEnqueteTitre(r.id_enquete) }}</strong> – {{ r.email }}
+     </div>
+
+     <div class="response-details" *ngIf="isOpen(r.id)">
+       <div *ngIf="questionsByResponse[r.id]?.length; else noQuestions">
+         <div *ngFor="let q of questionsByResponse[r.id]" class="question-item">
+           <strong>Question:</strong> {{ q.text_question }} <br>
+           <strong>Réponse:</strong> {{ getAnswerValue(r, q.id_question) }}
+         </div>
+       </div>
+       <ng-template #noQuestions>
+         Aucune question disponible pour cette enquête.
+       </ng-template>
+     </div>
+   </li>
+ </ul>
+</div>

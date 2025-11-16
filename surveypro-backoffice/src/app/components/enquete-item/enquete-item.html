@@ -1,0 +1,47 @@
+<div class="enquete-card" (click)="goEnquete(enquete.id_enquete)">
+  <!-- Titre + statut -->
+  <div class="title_badge">
+    <h3 class="enquete-title">{{ enquete.enquete_name }}</h3>
+    <span 
+      class="enquete-badge" 
+      [class.status-active]="enquete.status === 'active'"
+      [class.status-draft]="enquete.status === 'draft'"
+      [class.status-closed]="enquete.status === 'closed'">
+      {{ getStatusText(enquete.status) }}
+    </span>
+  </div>
+  
+
+  <!-- Description -->
+  <p class="enquete-description">{{ getFirstWords(enquete.description, 6) }}</p>
+
+  <!-- Infos : date, réponses, durée -->
+  <div class="enquete-info">
+    <div class="info-item">
+      <span class="icon">
+        <fa-icon [icon]="faCalendar"></fa-icon>
+      </span> Créée le {{ enquete.startDate | date:'dd/MM/yyyy' }}
+    </div>
+    <div class="info-item">
+      <span class="icon"><fa-icon [icon]="faUser"></fa-icon>
+        réponses
+      </span>  
+    </div>
+    <div class="info-item">
+      <span class="icon"><fa-icon [icon]="faClock"></fa-icon></span>
+       </div>
+  </div>
+
+  <!-- Badge catégorie -->
+  <div class="enquete-category">
+    <span>{{ enquete.category }}</span>
+  </div>
+
+  <!-- Boutons -->
+  <div class="enquete-buttons">
+    <button *ngIf="enquete.status==='active'" class="btn btn-primary flex-1">Participer</button>
+    <button *ngIf="enquete.status==='closed'" class="btn btn-outline flex-1">Voir les résultats</button>
+    <button *ngIf="enquete.status==='draft'" class="btn btn-outline flex-1">Modifier</button>
+    <button class="btn btn-ghost btn-sm">Détails</button>
+  </div>
+</div>

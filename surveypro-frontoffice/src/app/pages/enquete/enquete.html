@@ -1,0 +1,47 @@
+<div *ngIf="enquete || (questions$ | async)?.length" class="container">
+  <div class="enquete-container">
+    <!-- Affichage enquête -->
+    <div *ngIf="enquete">
+      <h3 class="enquete-title">{{ enquete.enquete_name }}</h3>
+      <p class="enquete-description">{{ enquete.description }}</p>
+    </div>
+
+    <form (ngSubmit)="submitEnquete()" class="enquete-form">
+      <!-- Champ email -->
+      <div class="email-card" *ngIf="enquete">
+        <label class="email-label">
+          Votre adresse email <span class="required">*</span>
+        </label>
+        <input 
+          id="email" 
+          type="email" 
+          [(ngModel)]="email"
+          name="email"
+          required 
+          class="email-input"
+          placeholder="exemple@email.com"
+        />
+        <div *ngIf="isSubmitted() && !email" class="error-msg">
+          L’email est requis
+        </div>
+      </div>
+
+      <!-- Questions -->
+      <div *ngIf="isLoading">Chargement...</div>
+      <div *ngIf="!isLoading && (questions$ | async)?.length">
+        <app-question-item
+          *ngFor="let question of questions$ | async; let i = index"
+          [question]="question"
+          [index]="i"
+          [formSubmitted]="isSubmitted()"
+          (answerChange)="handleAnswerChange($event)">
+        </app-question-item>
+      </div>
+
+      <!-- Bouton -->
+      <div class="submit-container" *ngIf="!isLoading">
+        <button type="submit" class="submit-btn">Envoyer</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,175 @@
+<div *ngIf="enquete" class="enquete_glob">
+
+  <div class="survey-container">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-top">
+          <div class="card-content">
+            <!-- Titre + Statut -->
+            <div class="card-title-row">
+              <h2 class="card-title">{{ enquete.enquete_name }} </h2>
+              <span class="status-badge"
+                [class.status-active]="enquete.status === 'active'"
+                [class.status-draft]="enquete.status === 'draft'"
+                [class.status-closed]="enquete.status === 'closed'">
+                {{ getStatusText(enquete.status) }}
+              </span>
+            </div>
+  
+            <!-- Description -->
+            <div class="enquete-category">
+              <span>{{ enquete.category }}</span>
+            </div>  
+            <p class="card-description">{{ enquete.description }}</p>
+  
+            <!-- Infos principales -->
+            <div class="info-grid">
+              <!-- Date -->
+              <div class="info-box">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <div>
+                  <span class="info-label">Créée le</span>
+                  <p class="info-value">{{ enquete.startDate | date:'dd/MM/yyyy' }}</p>
+                </div>
+              </div>
+  
+              <!-- Réponses -->
+              <div class="info-box">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 20h5V4H2v16h5m10 0v-6H7v6m10 0H7" />
+                </svg>
+                <div>
+                  <span class="info-label">Réponses</span>
+                  <p class="info-value">{{ getResponsesCount( ) }}</p>
+                </div>
+              </div>
+  
+              <!-- Durée -->
+              <div class="info-box">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div>
+                  <span class="info-label">Durée moy.</span>
+                  <p class="info-value">3m 45s</p>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Actions -->
+            <div class="actions">
+              <button   *ngIf="!isClosed" (click)="openEditModal()" class="btn-outline">
+                <fa-icon [icon]="faEdit" class="text-blue-500"></fa-icon>
+                Modifier
+              </button>
+        
+              <button (click)="deleteEnquete()" class="btn-outline">
+                <fa-icon [icon]="faTrash" class="text-blue-500"></fa-icon> 
+                Supprimer
+              </button>
+    
+              <button *ngIf="!isClosed"
+                
+                class="btn"
+                [ngClass]="{
+                  'btn-green': enquete.status === 'active',
+                  'btn-gray': enquete.status === 'closed'
+                }"
+                (click)="publierEnquete()">
+                <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {{ enquete.status === 'active' ? 'Stopper' : 'Publier' }}
+              </button>
+
+
+        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <section class="enquete-container">
+    <div class="cardQ">
+      <!-- Header -->
+      <div class="cardQ-header">
+        <div class="headerQ-left">
+          <h2>Questions de l'enquête</h2>
+          <p>{{ (questions$ | async)?.length || 0 }} question(s) configurée(s)</p>
+        </div>
+        <button *ngIf="!isClosed"
+                
+        class="btn"
+        [ngClass]="{
+          'btn-green': enquete.status === 'active',
+          'btn-gray': enquete.status === 'closed'
+        }"
+        (click)="publierEnquete()">
+        <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        {{ enquete.status === 'active' ? 'Stopper' : 'Publier' }}
+      </button>      </div>
+  
+      <!-- Content -->
+      <div class="cardQ-content">
+        <app-question-item
+          *ngFor="let question of questions$ | async; let i = index"
+          [question]="question"
+          [index]="i"
+          [isPreviewMode]="false"
+          [isClosed]="isClosed"
+          (edit)="onEditQuestion($event)"
+          (delete)="handleDeleteQuestion($event)">
+        </app-question-item>
+      </div>
+    </div>
+  </section>
+  
+  <div class="questions-list">
+    
+  
+
+    <!-- Modal question -->
+    <app-question-modal
+      [id_enquete]="id_enquete"
+      [questionToEdit]="editingQuestion" 
+      [statusEnquete]="statusEnquete()"
+      (questionCreated)="onQuestionCreated($event)"
+      (questionSaved)="onQuestionCreated($event)"
+      >
+      
+    </app-question-modal>
+  </div>
+
+
+
+
+  <div class="nav-actions" *ngIf="!isClosed">
+    <app-enquete-modal 
+      [(open)]="modalOpen"
+      [enquete]="selectedEnquete"
+      (openChange)="handleModalChange($event)"
+      (enqueteChange)="updateEnquete($event)">
+    </app-enquete-modal>
+  </div>
+</div>
+
+
+
+

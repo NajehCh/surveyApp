@@ -1,0 +1,107 @@
+<div class="main">
+  <div class="dashboard-header">
+    <h1 class="dashboard-title">Tableau de bord</h1>
+    <p class="dashboard-subtitle">Aperçu de vos enquêtes et performances</p>
+  </div>
+  <div class="stats-grid">
+    <!-- Carte 1 -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Enquêtes actives</h3>
+        <span class="icon">📊</span>
+      </div>
+      <div class="card-content">
+        <div class="card-value"> {{ getActiveCount(enquetes$ | async) }}</div>
+        <p class="card-subtext">+{{getActivePercentage()}}% vs mois dernier</p>
+
+      </div>
+    </div>
+  
+    <!-- Carte 2 -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Réponses totales</h3>
+        <span class="icon">💬</span>
+      </div>
+      <div class="card-content">
+        <div class="card-value">{{getResponsesCount()}}</div>
+        <p class="card-subtext"> +{{getMonthlyResponseRate()}}% ce mois</p>
+      </div>
+    </div>
+  
+    <!-- Carte 3 -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">En Brouillon</h3>
+        <div class="yellow-dot"></div>
+      </div>
+      <div class="card-content">
+        <div class="card-value"> {{ getDraftCount(enquetes$ | async) }}</div>
+        <p class="card-subtext">+{{getDraftPercentage()}}% vs mois dernier</p>
+      </div>
+    </div>
+  
+    <!-- Carte 4 -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Participants uniques</h3>
+        <span class="icon">👥</span>
+      </div>
+      <div class="card-content">
+        <div class="card-value">{{getTotalUsers()}}</div>
+        <p class="card-subtext">+8% cette semaine</p>
+      </div>
+    </div>
+  </div>
+    <!-- HTML -->
+    <div class="div_day_">
+
+      <!-- Carte 1 : Évolution des réponses -->
+      <div class="card_day">
+        <div class="cardDP-header">
+          <h3 class="cardDP-title">Évolution des réponses quotidiennes (%)</h3>
+        </div>
+        <div class="cardDP-content">
+          <ul>
+            <li *ngFor="let e of getDailyEvolution()">
+              <span class="day-name">{{ e.day }}</span>
+              <div class="progress-wrapper">
+                <div class="progress-bar" [style.width]="e.evolution + '%'"></div>
+                <span class="progress-value">{{ e.evolution }}%</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    
+      <div class="week_perf">
+      <!-- Carte 2 : Performance -->
+      <div class="card_week">
+        <div class="cardD-header">
+          <h3 class="cardD-title">Performance cette semaine</h3>
+        </div>
+        <div class="cardw-content">
+          <ul>
+            <li class="dailres" *ngFor="let r of getDailyResponses()">
+              <span class="day-name">{{ r.day }} : </span>
+              <span class="day-value">{{ r.count }} réponses</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card_week">
+        <div class="cardD-header">
+          <h3 class="cardD-title"> Taux d’évolution par rapport à hier :</h3>
+        </div>
+       
+        <span [ngClass]="{'positive': getDailyResponseRateChange() > 0,
+                          'negative': getDailyResponseRateChange() < 0}">
+          {{ getDailyResponseRateChange() }}%
+        </span>
+      </div>
+      
+    </div>
+    
+  </div>
+</div>

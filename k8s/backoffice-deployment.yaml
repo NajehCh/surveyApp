@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backoffice-deployment
+  namespace: backoffice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backoffice
+  template:
+    metadata:
+      labels:
+        app: backoffice
+    spec:
+      containers:
+        - name: backoffice
+          image: registry.gitlab.com/najehch/surveypro/backoffice:latest
+          imagePullPolicy: Always
+          env: 
+            - name: API_URL
+              value: "http://127.0.0.1:35865/"
+          ports:
+            - containerPort: 4200
+          resources:
+            requests:
+              cpu: "450m"
+              memory: "712Mi"
+            limits:
+              cpu: "600m"
+              memory: "1Gi"

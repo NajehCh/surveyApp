@@ -1,0 +1,230 @@
+body {
+  display: flex;
+  justify-content: center; /* centre horizontalement */
+  align-items: center;     /* centre verticalement */
+  height: 90vh;           /* prend toute la hauteur de la fenêtre */
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+.login-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Box principale */
+.login-box {
+  margin-top: 50px;
+  width: 100%;
+  max-width: 450px;
+  background-color: #ffffff;
+  padding: 50px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+
+/* Icone */
+.icon-wrapper {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  background-color: rgb(221, 235, 235);
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+
+.icon-inner {
+  width: 32px;
+  height: 32px;
+  background-color:cadetblue;
+  border-radius: 8px;
+}
+.card-content {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.form-group {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content:flex-start; /* centre horizontalement */
+  align-items:flex-start; 
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-weight: bold;
+  color: #111827; /* foreground */
+}
+
+
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;   /* occupe toute la largeur */
+}
+.input-wrapper input {
+  width: 100%;   /* input prend toute la largeur dispo */
+  height: 45px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s;
+  padding: 10px 40px 10px 12px; /* espace à gauche et à droite (pour l'icône œil) */
+  box-sizing: border-box;
+}
+.input-wrapper input:focus {
+  border-color: #27df6e1a;
+  box-shadow: 0 0 0 4px #27df6e1a;
+  outline: none;
+}
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.error {
+  color: red;
+  font-size: 14px; /* optionnel */
+  font-weight: bold; /* optionnel */
+}
+
+.toggle-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eye-icon {
+  width: 20px;
+  height: 20px;
+  stroke: #6b7280; /* gris neutre */
+  pointer-events: none;
+}
+
+
+.forgot-password {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.forgot-password a {
+  font-size: 0.875rem;
+  color:darkcyan;
+  text-decoration: none;
+}
+
+
+
+
+.card-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 24px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+/* Bouton principal */
+.submit-btn {
+  width: 100%;
+  height: 50px;
+  background-color:cadetblue; /* primary */
+  color: #ffffff; /* primary-foreground */
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 10px 15px #c8d1c9;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.submit-btn:hover {
+  background-color:darkcyan; /* hover primary */
+  box-shadow: 0 12px 20px #c8cec9;
+}
+
+/* Spinner */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top: 2px solid #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Lien Créer un compte */
+.create-account {
+  font-size: 0.875rem;
+  color: #6b7280; /* muted-foreground */
+}
+
+.create-link {
+  font-weight: 500;
+  color: darkcyan; /* primary */
+  text-decoration: none;
+  margin-left: 4px;
+  transition: color 0.2s;
+}
+
+.create-link:hover, .forgot-password a:hover {
+  color: #10841f;
+  font-size: 15px; /* optionnel */
+
+}
+.yellow-dot {
+  border-radius: 9%;       
+  animation: blink 3s infinite; 
+  width: 50px;
+  height: 50px;
+  background-color: #006e2a1a;
+  border-radius: 16px;
+}
+
+@keyframes blink {
+  0%, 50%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 5px #555452;
+  }
+  25%, 75% {
+    opacity: 0.3;
+    box-shadow: 0 0 2px #555452;
+  }
+}

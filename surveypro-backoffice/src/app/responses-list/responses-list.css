@@ -1,0 +1,110 @@
+/* Container général */
+.container {
+ max-width: 800px;
+ margin: 2rem auto;
+ padding: 1rem;
+ font-family: Arial, sans-serif;
+}
+
+/* Titre et description */
+.title-email h1 {
+ margin: 0;
+ font-size: 2rem;
+ color: #333;
+}
+
+.title-email p {
+ margin: 0.2rem 0 1rem;
+ color: #666;
+ font-size: 0.9rem;
+}
+
+/* Champ de recherche */
+.search-container {
+ margin-bottom: 1rem;
+}
+
+.search-input {
+ width: 100%;
+ padding: 0.5rem 1rem;
+ font-size: 1rem;
+ border: 1px solid #ccc;
+ border-radius: 6px;
+ outline: none;
+ transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-input:focus {
+ border-color: #007bff;
+ box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Liste des réponses */
+.email-list {
+ list-style: none;
+ padding: 0;
+ margin: 0;
+}
+
+.email-item {
+ border: 1px solid #ddd;
+ border-radius: 6px;
+ margin-bottom: 0.5rem;
+ padding: 0.8rem 1rem;
+ cursor: pointer;
+ transition: background-color 0.2s;
+}
+
+.email-item:hover {
+ background-color: #f9f9f9;
+}
+
+/* Infos de l’email */
+.email-info {
+ font-size: 1rem;
+ font-weight: 500;
+ color: #333;
+}
+
+/* Détails de la réponse */
+.response-details {
+ margin-top: 0.5rem;
+ padding: 0.5rem 1rem;
+ border-top: 1px solid #eee;
+ background-color: #fafafa;
+ border-radius: 0 0 6px 6px;
+ animation: slideDown 0.2s ease-in-out;
+}
+
+/* Animation ouverture */
+@keyframes slideDown {
+ from { opacity: 0; max-height: 0; }
+ to { opacity: 1; max-height: 500px; }
+}
+
+/* Questions */
+.question-item {
+ margin-bottom: 0.5rem;
+ padding-bottom: 0.3rem;
+ border-bottom: 1px dashed #ddd;
+}
+
+.question-item:last-child {
+ border-bottom: none;
+}
+
+/* Aucun résultat */
+.no-results {
+ text-align: center;
+ color: #888;
+ font-size: 1rem;
+ margin-top: 1rem;
+}
+
+/* Chargement */
+.loading {
+ text-align: center;
+ color: #555;
+ font-size: 1rem;
+ margin-top: 1rem;
+}

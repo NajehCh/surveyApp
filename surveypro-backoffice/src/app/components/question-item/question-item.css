@@ -1,0 +1,166 @@
+/* Bloc principal */
+.question-item {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.question-item:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Header */
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+/* Partie gauche */
+.question-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Numéro */
+.question-number {
+  width: 40px;
+  height: 40px;
+  background: #111827;
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+/* Tags */
+.question-tags {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.badge {
+  font-size: 0.85rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.badge-outline {
+  border: 1px solid #d1d5db;
+  color: #374151;
+  background: #fff;
+}
+
+.badge-required {
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  color: #111827;
+}
+
+/* Texte de la question */
+.question-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 1rem 0;
+  line-height: 1.5;
+}
+
+.question-text .required {
+  color: #dc2626;
+  margin-left: 0.25rem;
+}
+
+
+/* ==================== */
+/* OPTIONS DE RÉPONSE   */
+/* ==================== */
+
+.question-options {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Radio & Checkbox */
+.option-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.option-label input {
+  accent-color: #2563eb;
+  transform: scale(1.1);
+}
+
+/* Select */
+.custom-select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: #fff;
+  color: #111827;
+}
+
+/* Input texte */
+.text-input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.text-input:focus {
+  border-color: #2563eb;
+}
+
+/* Rating */
+.rating-options {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.rating-btn {
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.rating-btn:hover {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}
+
+/* Oui / Non */
+.yes-no-options {
+  display: flex;
+  gap: 1rem;
+}
+
+.yes-no-options label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}

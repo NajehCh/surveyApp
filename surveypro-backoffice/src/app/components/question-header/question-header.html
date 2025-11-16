@@ -1,0 +1,25 @@
+<div class="card">
+    <div class="card-header">
+      <div class="header-content">
+        <div class="title-section">
+          <div class="card-title">
+            <div class="icon-container">
+              <fa-icon [icon]="faNoteSticky" class="Sticky_icon"></fa-icon> 
+            </div>
+            <span>
+              {{ isPreviewMode ? 'Enquête' : "Questions de l'enquête" }}
+            </span>
+          </div>
+          <div *ngIf="!isPreviewMode" class="card-description">
+            {{ questionsCount }} question{{ questionsCount > 1 ? 's' : '' }} configurée{{ questionsCount > 1 ? 's' : '' }}
+          </div>
+        </div>
+        <div class="button-section">
+          <button class="btn" >
+            {{'Publier l\'enquête' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

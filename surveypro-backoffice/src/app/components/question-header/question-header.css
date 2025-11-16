@@ -1,0 +1,110 @@
+.card {
+    border: none;
+    max-width: 950px;
+    box-shadow: 0 4px 12px rgba(87, 196, 14, 0.1);
+    background-color: #fff;
+    border-radius: 8px;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    margin: 0 auto 20px auto;  
+  }
+ 
+  .card-header {
+    border-bottom: 1px solid #e5e7eb;
+    background: linear-gradient(to right, #f9fafb, #ffffff);
+    padding: 16px;
+  }
+  .Sticky_icon{
+    color: #036b08;
+  }
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .title-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .card-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #111827;
+  }
+  
+  .icon-container {
+    width: 32px;
+    height: 32px;
+    background-color: rgba(59, 130, 246, 0.1); /* couleur primaire /10 */
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .icon {
+    font-size: 20px;
+    color: #3b82f6; /* couleur primaire */
+  }
+  
+  .card-description {
+    font-size: 1rem;
+    color: #374151;
+  }
+  .button-section{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap :10px;
+  }
+  .btn_preview{
+    padding: 8px 32px;
+    border: none;
+    background: #e8f5e9;
+    color: #036b08;
+    border-radius: 6px;
+    font-weight: 600;
+    border: 0.1rem solid ;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+  }
+ 
+  .btn {
+    padding: 8px 32px;
+    border: none;
+    border-radius: 6px;
+    background: #e8f5e9;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary {
+    background: linear-gradient(to right,#409945, #58ca5d);
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(to right, #2563eb, #1d4ed8);
+  }
+  
+  .btn-secondary {
+    background: linear-gradient(to right, #f59e0b, #d97706);
+  }
+  
+  .btn-secondary:hover {
+    background: linear-gradient(to right, #d97706, #b45309);
+  }
+  

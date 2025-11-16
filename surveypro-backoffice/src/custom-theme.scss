@@ -1,0 +1,27 @@
+// --------------------------------------------------------
+// custom-theme.scss
+// --------------------------------------------------------
+
+// 1️⃣ Toutes les directives @use doivent être en début de fichier
+@use '@angular/material' as mat;
+
+// 2️⃣ Définition du thème Material
+html {
+  @include mat.theme((
+    color: (
+      primary: mat.$azure-palette,   // couleur principale
+      tertiary: mat.$blue-palette,   // couleur tertiaire
+    ),
+    typography: Roboto,              // police Roboto
+    density: 0,                       // densité par défaut
+  ));
+}
+
+// 3️⃣ Style global du body
+body {
+  color-scheme: light;                  // thème clair
+  background-color: var(--mat-sys-surface);  // couleur de fond Material
+  color: var(--mat-sys-on-surface);          // couleur texte Material
+  font: var(--mat-sys-body-medium);          // police par défaut Material
+  margin: 0;                                 // reset margin
+}

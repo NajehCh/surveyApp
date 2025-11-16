@@ -1,0 +1,159 @@
+
+/* Grille */
+.stats-grid {
+ flex: 1;  display: grid;
+   grid-template-columns: 1fr;
+   gap: 1rem; /* gap-6 */
+   margin-bottom: 1.5rem; /* mb-8 */
+ }
+ 
+ @media (min-width: 768px) {
+   .stats-grid {
+     grid-template-columns: repeat(2, 1fr); /* md:grid-cols-2 */
+   }
+ }
+ 
+ 
+ 
+ @media (min-width: 1224px) {
+   .stats-grid {
+     grid-template-columns: repeat(3, 1fr); /* lg:grid-cols-4 */
+   }
+ }
+ 
+ @media (min-width: 1424px) {
+   .stats-grid {
+     grid-template-columns: repeat(4, 1fr); /* lg:grid-cols-4 */
+   }
+ }
+ .card {
+  width: 300px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+/* Hover */
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  border-color: #0d8334a1;
+}
+
+/* Clic */
+.card:active {
+  transform: translateY(0px) scale(0.98);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border-color: #0d8334a1;
+}
+
+/* ✅ Carte active */
+.card.active {
+  border: 2px solid #000; /* bordure noire */
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15); /* un peu plus marqué */
+  transform: translateY(-2px);
+}
+.cardPub{
+  width: 300px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  cursor: pointer;
+
+  transform: translateY(-4px);
+  box-shadow: 0 6px 6px rgba(0,0,0,0.12);
+  border-color: #0d8334a1;
+}
+ /* Header */
+ .card-header {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding-bottom: 0.5rem; /* pb-2 */
+ }
+ 
+ .card-title {
+   font-size: 0.875rem; /* text-sm */
+   font-weight: 500;
+   color: #111; /* text-card-foreground */
+   margin: 0;
+ }
+ 
+ .icon {
+   font-size: 1rem; /* h-4 w-4 */
+   color: #3b82f6; /* primary par défaut */
+ }
+ 
+ /* Contenu */
+ .card-content {
+   margin-top: 0.5rem;
+ }
+ 
+ .card-value {
+   font-size: 1.5rem; /* text-2xl */
+   font-weight: bold;
+   color: #111; /* text-card-foreground */
+ }
+ 
+ .card-subtext {
+   font-size: 0.75rem; /* text-xs */
+   color: #6b7280; /* text-muted-foreground */
+   margin-top: 0.25rem;
+ }
+
+ .grid {
+  display: grid;
+  gap: 1.5rem; /* espace entre les cartes */
+  padding: 1rem;
+
+  /* responsive auto-fit : s'adapte tout seul */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Les enfants (ici <app-enquete-item>) doivent se comporter comme des cartes */
+.grid app-enquete-item {
+  display: block; /* pour que les styles appliqués à .card marchent */
+  width: 100%;
+}
+.yellow-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  margin-right: 6px;
+  background-color: #facc15; 
+  border-radius: 50%;       
+  animation: blink 3s infinite; 
+}
+
+@keyframes blink {
+  0%, 50%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 5px #facc15;
+  }
+  25%, 75% {
+    opacity: 0.3;
+    box-shadow: 0 0 2px #facc15;
+  }
+}
+
+
+.btn-icon {
+  width: 16px;
+  height: 16px;
+  color: #0d8334a1;
+}
+.status-icon{
+  width: 16px;
+  height: 16px;
+  color: #0d8334a1;
+}
+.fabolt{
+  width: 16px;
+  height: 16px;
+  color: #facc15;
+}

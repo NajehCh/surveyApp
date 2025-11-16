@@ -1,0 +1,100 @@
+<div class="preview-card">
+  <div class="question-header">
+    <div class="index_text">
+      <div class="question-index">
+        <span>{{ index + 1 }}</span>
+      </div>
+    </div>
+    <h3 class="question-text">
+      {{ question.text_question }}
+      <span *ngIf="question.required" class="required-star">*</span>
+    </h3>
+  </div>
+
+  <div class="question-options">
+    <ng-container [ngSwitch]="question.type">
+
+      <!-- Radio -->
+      <div *ngSwitchCase="'radio'">
+        <label *ngFor="let opt of question.options" class="option-label">
+          <input type="radio"
+                 [name]="'question-' + question.id_question"
+                 [value]="opt.id_option"
+                 (change)="onAnswer(opt.id_option, opt.text_option)" />
+          {{ opt.text_option }}
+        </label>
+        <div *ngIf="question.required && !selectedOptions.length && formSubmitted" class="error-msg">
+          Veuillez sélectionner une option.
+        </div>
+      </div>
+
+      <!-- Checkbox -->
+      <div *ngSwitchCase="'checkbox'">
+        <label *ngFor="let opt of question.options" class="option-label">
+          <input type="checkbox"
+                 [value]="opt.id_option"
+                 (change)="handleCheckboxChange(opt.id_option, opt.text_option, $event.target.checked)" />
+          {{ opt.text_option }}
+        </label>
+        <div *ngIf="question.required && !selectedOptions.length && formSubmitted" class="error-msg">
+          Veuillez cocher au moins une option.
+        </div>
+      </div>
+
+      <!-- Select -->
+      <div *ngSwitchCase="'select'">
+        <select class="custom-select" (change)="onSelectChange($event)">
+          <option value="">--Sélectionnez--</option>
+          <option *ngFor="let opt of question.options" [value]="opt.id_option">
+            {{ opt.text_option }}
+          </option>
+        </select>
+        <div *ngIf="question.required && !textAnswer && formSubmitted" class="error-msg">
+          Veuillez sélectionner une option.
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div *ngSwitchCase="'text'">
+        <input type="text" 
+               placeholder="Votre réponse..." 
+               class="text-input"
+               (input)="onAnswer(undefined, $event.target.value)" />
+        <div *ngIf="question.required && !textAnswer && formSubmitted" class="error-msg">
+          Veuillez remplir ce champ.
+        </div>
+      </div>
+
+      <!-- Rating -->
+      <div *ngSwitchCase="'rating'" >
+        <div class="rating-options">
+          <button *ngFor="let r of [1,2,3,4,5]"
+          type="button"
+          class="rating-btn"
+          [class.selected]="selectedRating === r"
+          (click)="toggleRating(r)">
+           {{ r }}
+        </button>
+        </div>
+       
+        <div *ngIf="question.required && !selectedRating && formSubmitted" class="error-msg">
+          Veuillez donner une note.
+        </div>
+      </div>
+
+      <!-- Yes/No -->
+      <div *ngSwitchCase="'yes_no'" class="yes-no-options">
+        <label *ngFor="let option of question.options">
+          <input type="radio"
+                 [name]="'question-' + question.id_question"
+                 (change)="onAnswer(option.id_option, option.text_option)" />
+          {{ option.text_option }}
+        </label>
+        <div *ngIf="question.required && !selectedOptions.length && formSubmitted" class="error-msg">
+          Veuillez sélectionner Oui ou Non.
+        </div>
+      </div>
+
+    </ng-container>
+  </div>
+</div>

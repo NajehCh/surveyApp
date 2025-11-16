@@ -1,0 +1,11 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="layout">
+  <!-- Sidebar toujours visible -->
+  <app-side-bar *ngIf="isLoggedIn"class="sidebar"></app-side-bar>
+
+  <!-- Contenu principal -->
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

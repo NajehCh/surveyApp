@@ -1,0 +1,134 @@
+<div class="login-container">
+
+  <div class="login-box">
+
+    <div class="login-header">
+        <div class="icon-wrapper">
+          <div class="icon-inner"></div>
+        </div>
+        <h1>Bienvenue</h1>
+        <p>Creer un compte</p>
+    </div>
+
+    <div class="card-content">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      
+      <div class="form-group">
+        <label>Nom d'utilisateur</label>
+        <div class="input-wrapper">
+          <input type="text" formControlName="username" />
+
+        </div>
+        <div class="error" *ngIf="submitted && f['username'].errors">
+          <span *ngIf="f['username'].errors?.['required']">Le nom est requis</span>
+          <span *ngIf="f['username'].errors?.['minlength']">Minimum 3 caractères</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Adresse email</label>
+          <div class="input-wrapper">
+            <input 
+              formControlName="email" 
+              id="email"
+              type="email"
+              placeholder="votre@email.com" 
+              required/>  
+          </div>
+          <div class="error" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">Email invalide</div>
+      </div>
+        
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <div class="input-wrapper">
+          <input 
+            formControlName="password"
+            id="password"
+            [type]="showPassword ? 'text' : 'password'"
+            placeholder="Votre mot de passe"
+            required
+          />
+          <button type="button" class="toggle-btn" (click)="togglePassword()">
+            <svg *ngIf="!showPassword" class="eye-icon" xmlns="http://www.w3.org/2000/svg"
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 
+                    8.268 2.943 9.542 7-1.274 4.057-5.065 
+                    7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+            </svg>
+            <svg *ngIf="showPassword" class="eye-icon" xmlns="http://www.w3.org/2000/svg"
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13.875 18.825A10.05 10.05 0 0112 
+                    19c-4.477 0-8.268-2.943-9.542-7a9.96 
+                    9.96 0 012.182-3.442m3.118-2.3A9.959 
+                    9.959 0 0112 5c4.477 0 8.268 2.943 
+                    9.542 7a9.958 9.958 0 01-4.132 5.411M15 
+                    12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 3l18 18"/>
+            </svg>
+          </button>
+        </div>
+        <div class="error" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+            Mot de passe requis (min 6 caractères)
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirmer mot de passe</label>
+        <div class="input-wrapper">
+          <input 
+            formControlName="confirmPassword"
+            id="confirmPassword"
+            [type]="showPassword ? 'text' : 'password'"
+            placeholder="Votre mot de passe"
+            required
+          />
+          <button type="button" class="toggle-btn" (click)="togglePassword()">
+            <svg *ngIf="!showPassword" class="eye-icon" xmlns="http://www.w3.org/2000/svg"
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 
+                    8.268 2.943 9.542 7-1.274 4.057-5.065 
+                    7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+            </svg>
+            <svg *ngIf="showPassword" class="eye-icon" xmlns="http://www.w3.org/2000/svg"
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13.875 18.825A10.05 10.05 0 0112 
+                    19c-4.477 0-8.268-2.943-9.542-7a9.96 
+                    9.96 0 012.182-3.442m3.118-2.3A9.959 
+                    9.959 0 0112 5c4.477 0 8.268 2.943 
+                    9.542 7a9.958 9.958 0 01-4.132 5.411M15 
+                    12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 3l18 18"/>
+            </svg>
+          </button>
+        </div>
+        <div class="error" *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched">
+            Mot de passe requis (min 6 caractères)
+        </div>
+      </div>     
+            
+        
+      <div class="card-footer">
+  
+        <!-- <button type="submit"  [disabled]="loginForm.invalid" class="submit-btn" id="login-btn">
+            <span id="btn-text">Se connecter</span>
+              <div id="spinner" class="spinner hidden"></div>
+          </button> -->
+          <div class="create-account">
+            Pas encore de compte ? 
+            <span class="create-link" (click)="goLogin()">Connectez-vous!</span>
+          </div>
+        </div>
+            
+      </form>
+        </div>
+ 
+  </div>
+  </div>

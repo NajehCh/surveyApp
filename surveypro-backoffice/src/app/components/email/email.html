@@ -1,0 +1,102 @@
+<div *ngIf="emails$ | async as emails" class="title-email">
+  <h1>Gestion des Emails</h1>
+  <p>Gérez liste de contacts et envoyez des emails</p>
+
+  <div *ngIf="isLoading">Chargement...</div>
+
+  <div class="button_email">
+  
+      <button (click)="openModal()"><fa-icon [icon]="faPlus" class="text-blue-500"></fa-icon> 
+        Ajouter Email
+      </button>
+        <button 
+        [disabled]="selectedEmails.length === 0" 
+        (click)="openSendModal()">
+        <fa-icon [icon]="faEnvelope" class="text-blue-500"></fa-icon> Envoyer Email ({{ selectedEmails.length }})
+      </button>
+      
+  <div class="select-all">
+    <button (click)="toggleSelectAllFromButton()">
+      <fa-icon [icon]="selectAllChecked ? faSquareCheck : faSquare" class="mr-2 text-blue-500"></fa-icon>
+      {{ selectAllChecked ? 'Tout désélectionner' : 'Sélectionner tout' }}
+    </button>
+    
+  </div>
+  </div>
+
+  <div class="container">
+    <!-- Liste des emails -->
+  <ul *ngIf="!isLoading" class="email-list">
+    <li *ngFor="let email of emails$ | async" class="email-item">
+      <div class="email-info">
+        <input
+          type="checkbox"
+          [checked]="selectedEmails.includes(email.email)"
+          (change)="toggleSelection(email.email)"
+        />
+        {{ email.email }}
+      </div>
+      <div class="actions">
+        <button (click)="openModal(email)"><fa-icon [icon]="faEdit" class="text-blue-500"></fa-icon></button>
+        <button (click)="deleteEmail(email.id_email)"><fa-icon [icon]="faTrash" class="text-blue-500"></fa-icon></button>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Modal réutilisable (Ajouter / Modifier) -->
+<div class="modal" *ngIf="modalEmail">
+  <div class="modal-content">
+    <h2>{{ modalEmail.id_email ? 'Modifier le contact' : 'Ajouter un nouveau contact' }}</h2>
+
+    <label>
+      Email :
+      <input [(ngModel)]="modalEmail.email" />
+    </label>
+
+    <div class="modal-actions">
+      <button (click)="closeModal()">Annuler</button>
+      <button (click)="saveModal()">Sauvegarder</button>
+    </div>
+  </div>
+</div>
+<!-- Modal d’envoi -->
+<div class="modal" *ngIf="sendModalOpen">
+  <div class="modal-content">
+    <h2>Envoyer l'enquête</h2>
+
+    <!-- Emails sélectionnés (affichés avec + / -) -->
+    <div class="emails-list">
+      <p><strong>Destinataires :</strong></p>
+      <ul>
+        <li *ngFor="let email of emailsToSend; let i = index">
+          {{ email }}
+          <div>
+            <button (click)="removeEmail(i)" title="Supprimer">
+              <fa-icon [icon]="faX" class="text-red-300"></fa-icon>
+            </button>
+          </div>
+          
+        </li>
+      </ul>
+    </div>
+
+    <!-- Liste des enquêtes actives -->
+    <label for="enquete">Choisir une enquête active :</label>
+    <select id="enquete" [(ngModel)]="selectedEnqueteId">
+      <option *ngFor="let enquete of enquetes$ | async" [value]="enquete.id_enquete">
+        {{ enquete.enquete_name }}
+      </option>
+    </select>
+
+    <div class="modal-actions">
+      <button (click)="closeSendModal()">Annuler</button>
+      <button (click)="sendEmails()" [disabled]="!emailsToSend.length || !selectedEnqueteId">
+        Envoyer
+      </button>
+    </div>
+  </div>
+</div>
+
+</div>
+

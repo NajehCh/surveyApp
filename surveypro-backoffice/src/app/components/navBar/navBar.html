@@ -1,0 +1,16 @@
+<nav class="navbar">
+  <div class="logo-section" (click)="goHome()">
+    <div>
+      <h2 class="title">SurveyPro</h2>
+      <span class="subtitle">Administration des enquêtes</span>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+          </div>
+  </div>
+  
+  <div class="nav-actions" *ngIf="isLoggedIn">
+    <button (click)="openModal()">➕ Nouvelle enquête</button>
+    <app-enquete-modal [(open)]="modalOpen"></app-enquete-modal>
+    <button (click)="logout()">Déconnexion</button>
+  </div>
+</nav>

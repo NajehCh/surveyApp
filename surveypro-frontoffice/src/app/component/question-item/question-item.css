@@ -1,0 +1,171 @@
+/* Card générale */
+.preview-card {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+           
+  
+  }
+  
+  .edit-card {
+    background: linear-gradient(to bottom right, #f9fafb, #ffffff);
+    border: 1px solid #f3f4f6;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    align-items: center;  /* centre verticalement */
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    margin: 0 auto 20px auto;  /* centre horizontalement */
+    max-width: 950px;        
+    margin-top: 20px;
+    gap: 2rem;  
+  }
+  .edit-card:hover {
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+  }
+  
+  .question-header {
+    display: flex;
+    justify-content:flex-start;
+    align-items:start;
+    gap:10px;
+    flex-direction: row;
+    padding: 4px;
+  }
+ 
+  .question-index {
+    font-weight: bold;
+    font-size: 1rem;
+    padding:6px 9px; 
+    border-radius: 20px;
+    color: white;
+    background: linear-gradient(to right, darkcyan,darkcyan); /* secondaire */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  
+
+  
+  
+  
+  /* Question texte */
+  .question-text {
+    margin-top: 0.9rem;
+    font-size:130%;
+    font-weight: normal;
+  }
+  .required-star {
+    color: red;
+    font-weight: bold;
+    margin-left: 4px;
+    font-size: 1.2rem; /* un peu plus grande */
+  }
+  
+  /* Options */
+  .option-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .option-label:hover {
+    background-color: #f3f4f6;
+  }
+  
+  /* Inputs */
+  .text-input {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 15px;
+
+    border: 1px solid #d1d5db;
+  }
+  
+  /* Rating */
+  .rating-options {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .rating-btn {
+    width: 2.5rem;              /* taille légèrement augmentée */
+    height: 2.5rem;
+    margin: 5px;
+    border: 2px solid #d1d5db;
+    border-radius: 50%;         /* rond parfait */
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;  /* animation douce */
+  }
+  
+  .rating-btn:hover {
+    border-color: rgba(59,130,246,0.1);      /* bleu au survol */
+    background-color: rgba(59,130,246,0.1);
+  }
+  
+  .rating-btn.selected {
+    background: linear-gradient(to right, #0d4a83a1, #0b206690); /* secondaire */
+    color: white;
+  }
+  
+  /* Yes/No */
+  .yes-no-options {
+    display: flex;
+    gap: 1rem;
+  }
+  .yes-no-options label {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+  }
+  
+  
+  .custom-select {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: #fff;
+    font-size: 15px;
+    font-family: inherit;
+    color: #333;
+    appearance: none; /* supprime le style natif */
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  
+  .custom-select:focus {
+    border-color: #1976d2;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.2);
+  }
+  
+  .custom-select:hover {
+    border-color: #999;
+  }
+  
+  /* Petite flèche custom */
+  .custom-select {
+    background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px; /* espace pour la flèche */
+  }
+  
+
+  .error-msg{
+    color: red;
+    margin: 10px;
+  }

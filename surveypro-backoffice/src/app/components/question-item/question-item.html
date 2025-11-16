@@ -1,0 +1,84 @@
+<div [ngClass]="isPreviewMode ? 'preview-card' : 'edit-card'" class="question-item">
+
+
+  
+  <div class="question-header">
+    <!-- Numéro + Infos -->
+    <div class="question-info">
+      <div class="question-number">{{ index + 1 }}</div>
+
+      <!-- Type + Obligatoire -->
+      <div class="question-tags">
+        <span class="badge badge-outline">{{ question.type | titlecase }}</span>
+        <span *ngIf="question.required" class="badge badge-required">Obligatoire</span>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div *ngIf="!isClosed" class="question-actions">
+      <button (click)="onDelete()" class="btn-icon delete-btn"> <fa-icon [icon]="faTrash"></fa-icon></button>
+    </div>
+  </div>
+    <!-- Texte de la question -->
+    <h3 class="question-text">
+      {{ question.text_question }}
+      <span *ngIf="question.required" class="required">*</span>
+    </h3>
+
+  <!-- Options de la question -->
+  <div class="question-options">
+    <ng-container [ngSwitch]="question.type">
+
+    <!-- Radio -->
+    <div *ngSwitchCase="'radio'">
+      <label *ngFor="let opt of question.options" class="option-label">
+        <input type="radio" [name]="'question-' + question.id_question" />
+        {{ opt.text_option }}
+      </label>
+    </div>
+
+    <!-- Checkbox -->
+    <div *ngSwitchCase="'checkbox'">
+      <label *ngFor="let opt of question.options" class="option-label">
+        <input type="checkbox" />
+        {{ opt.text_option }}
+      </label>
+    </div>
+
+    <!-- Select -->
+    <div *ngSwitchCase="'select'">
+      <select class="custom-select">
+        <option *ngFor="let opt of question.options" [value]="opt.id_option">
+          {{ opt.text_option }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Text -->
+    <div *ngSwitchCase="'text'">
+      <input type="text" placeholder="Votre réponse..." class="text-input" />
+    </div>
+
+    <!-- Rating -->
+    <div *ngSwitchCase="'rating'" class="rating-options">
+      <button *ngFor="let r of [1,2,3,4,5]" class="rating-btn">{{ r }}</button>
+    </div>
+
+    <!-- Yes/No -->
+    <div *ngSwitchCase="'yes_no'" class="yes-no-options">
+      <label>
+        <input type="radio" [name]="'question-' + question.id_question" /> Oui
+      </label>
+      <label>
+        <input type="radio" [name]="'question-' + question.id_question" /> Non
+      </label>
+    </div>
+
+  </ng-container>
+</div>
+
+
+  </div>
+
+
+  

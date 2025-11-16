@@ -1,0 +1,90 @@
+<div class="modal-backdrop" *ngIf="open">
+  <div class="modal">
+    <h2>{{ enquete ? 'Modifier l\'enquête' : 'Ajouter une nouvelle enquête' }}</h2>
+    <p>
+      {{ enquete 
+        ? 'Modifiez les informations de l\'enquête.' 
+        : 'Remplissez les informations pour créer une nouvelle enquête.' 
+      }}
+    </p>
+
+    <form [formGroup]="enqueteForm" (ngSubmit)="handleSubmit()">
+
+      <!-- Nom enquête -->
+      <div class="form-group">
+        <label for="enquete_name">Nom de l'enquête</label>
+        <input type="text" id="enquete_name" formControlName="enquete_name" required/>
+        <div *ngIf="enqueteForm.get('enquete_name')?.touched && enqueteForm.get('enquete_name')?.invalid" class="error">
+          <small *ngIf="enqueteForm.get('enquete_name')?.errors?.['required']">Nom requis</small>
+          <small *ngIf="enqueteForm.get('enquete_name')?.errors?.['minlength']">Min 6 caractères</small>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" formControlName="description" rows="3"></textarea>
+        <div *ngIf="enqueteForm.get('description')?.touched && enqueteForm.get('description')?.invalid" class="error">
+          <small *ngIf="enqueteForm.get('description')?.errors?.['required']">Description requise</small>
+          <small *ngIf="enqueteForm.get('description')?.errors?.['minlength']">Min 6 caractères</small>
+        </div>
+      </div>
+
+      <!-- Dates -->
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="startDate">Date de début</label>
+          <input type="date" id="startDate" formControlName="startDate" />
+          <div *ngIf="enqueteForm.get('startDate')?.touched && enqueteForm.get('startDate')?.invalid" class="error">
+            <small>Date de début requise</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="endDate">Date de fin</label>
+          <input type="date" id="endDate" formControlName="endDate" />
+          <div *ngIf="enqueteForm.get('endDate')?.touched && enqueteForm.get('endDate')?.invalid" class="error">
+            <small>Date de fin requise</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Erreur de cohérence des dates -->
+      <div *ngIf="enqueteForm.errors?.['dateInvalid']" class="error">
+        <small>La date de fin doit être postérieure à la date de début</small>
+      </div>
+
+      <!-- Catégorie -->
+      <div class="form-group">
+        <label for="category">Catégorie</label>
+        <input type="text" id="category" formControlName="category" required />
+        <div *ngIf="enqueteForm.get('category')?.touched && enqueteForm.get('category')?.invalid" class="error">
+          <small *ngIf="enqueteForm.get('category')?.errors?.['required']">Catégorie requise</small>
+          <small *ngIf="enqueteForm.get('category')?.errors?.['minlength']">Min 2 caractères</small>
+        </div>
+      </div>
+
+      <!-- Statut -->
+      <div class="form-group">
+        <label for="status">Statut</label>
+        <select id="status" formControlName="status" required>
+          <option value="draft">Draft</option>
+          <option value="active">Active</option>
+          <option value="closed">Closed</option>
+        </select>
+        <div *ngIf="enqueteForm.get('status')?.touched && enqueteForm.get('status')?.invalid" class="error">
+          <small>Statut requis</small>
+        </div>
+      </div>
+
+      <!-- Boutons -->
+      <div class="modal-footer">
+        <button type="button" (click)="closeModal()" [disabled]="isSubmitting">Annuler</button>
+        <button type="submit" [disabled]="isSubmitting || enqueteForm.invalid">
+          {{ isSubmitting ? (enquete ? 'Modification...' : 'Création...') : (enquete ? 'Modifier l\'enquête' : 'Créer l\'enquête') }}
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

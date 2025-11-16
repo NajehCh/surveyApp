@@ -1,0 +1,69 @@
+<div>
+  <div class="stats-grid">
+
+
+    <div (click)="filterEnquetes('all')" class="card">
+      <div class="card-header">
+        <h3 class="card-title" >Toutes</h3>
+        <span class="icon">
+          <fa-icon [icon]="faBolt" class="fabolt"></fa-icon> 
+        </span>
+      </div>
+      <div class="card-content">
+        <!-- <div class="card-value"> {{ getActiveCount(enquetes$ | async) }}</div>
+        <p class="card-subtext">+{{getActivePercentage()}}% vs mois dernier</p> -->
+      </div>
+    </div>
+
+    <div (click)="filterEnquetes('active')" class="card">
+      <div class="card-header">
+        <h3 class="card-title" >Actives</h3>
+        <span class="icon">
+          <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+             stroke="currentColor">
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+         
+        </span>
+      </div>
+      <div class="card-content">
+        <!-- <div class="card-value"> {{ getActiveCount(enquetes$ | async) }}</div>
+        <p class="card-subtext">+{{getActivePercentage()}}% vs mois dernier</p> -->
+      </div>
+    </div>
+    <div (click)="filterEnquetes('draft')" class="card">
+      <div class="card-header">
+        <h3 class="card-title" >Brouillons</h3>
+        <span class="yellow-dot"></span>
+      </div>
+      <div class="card-content">
+        <!-- <div class="card-value"> {{ getActiveCount(enquetes$ | async) }}</div>
+        <p class="card-subtext">+{{getActivePercentage()}}% vs mois dernier</p> -->
+      </div>
+    </div>
+
+    <div (click)="filterEnquetesPublished()" class="cardPub">
+      <div class="card-header">
+        <h3 class="card-title" >Publiées</h3>
+          <span class="icon">
+            <fa-icon 
+            [icon]="faCircleCheck"
+            class="status-icon">
+          </fa-icon>
+          </span>
+      </div>
+      <div class="card-content">
+        <!-- <div class="card-value"> {{ getActiveCount(enquetes$ | async) }}</div>
+        <p class="card-subtext">+{{getActivePercentage()}}% vs mois dernier</p> -->
+      </div>
+    </div>
+  </div>
+  <div class="grid">
+    <app-enquete-item 
+      *ngFor="let enquete of filteredEnquetes$ | async" 
+      [enquete]="enquete">
+    </app-enquete-item>
+  </div>
+  
+</div>

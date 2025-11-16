@@ -1,0 +1,287 @@
+.enquete-category span {
+  display: inline-block;
+  font-size: 1rem;
+  padding: 0.125rem 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+  color: #374151;
+}
+/* Container principal */
+.survey-container {
+  grid-column: span 2 / span 2;
+}
+
+/* Card */
+.card {
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
+  padding: 1.5rem;
+}
+
+.card-header {
+  padding-bottom: 2rem;
+}
+
+.card-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* Titre */
+.card-title {
+  font-size: 1.875rem; /* 3xl */
+  font-weight: 600;
+  color: #111827;
+}
+
+.card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+/* Statut */
+.status-badge {
+  background: #d1fae5;
+  color: #065f46;
+  padding: 0.25rem 0.75rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Description */
+.card-description {
+  font-size: 1.125rem;
+  color: #374151;
+  line-height: 1.6;
+  max-width: 40rem;
+}
+
+/* Infos principales */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .info-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.info-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #f9fafb;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  color: #4b5563;
+}
+
+.info-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  display: block;
+}
+
+.info-value {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #f3f4f6;
+}
+
+.btn-outline {
+  border: 1px solid #d1d5db;
+  background: transparent;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-outline:hover {
+  background: #f9fafb;
+}
+
+.btn-primary {
+  background: #111827;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: #1f2937;
+}
+
+.btn-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Badge statut */
+.badge-status {
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: #dcfce7;
+  color: #166534;
+  font-weight: 500;
+}
+/* Statuts */
+.status-active {
+  background-color: #dcfce7; /* bg-green-100 */
+  color: #166534;            /* text-green-800 */
+}
+
+.status-draft {
+  background-color: #fef9c3; /* bg-yellow-100 */
+  color: #78350f;            /* text-yellow-800 */
+}
+
+.status-closed {
+  background-color: #fee2e2; /* bg-red-100 */
+  color: #991b1b;            /* text-red-800 */
+}
+
+.publish-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+
+
+
+/* Container principal */
+.enquete-container {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  background: #f9fafb;
+}
+
+/* Carte principale */
+.cardQ {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 960px;
+  overflow: hidden;
+}
+
+/* Header de la carte */
+.cardQ-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f3f4f6;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1.5rem;
+}
+
+.cardQ-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.cardQ-header p {
+  font-size: 1rem;
+  color: #4b5563;
+  margin-top: 0.25rem;
+}
+
+.headerQ-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Bouton principal */
+.btn-primaryQ {
+  background: #111827;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-primaryQ:hover {
+  background: #1f2937;
+}
+
+/* Contenu */
+.cardQ-content {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.2s ease;
+}
+
+.btn-green {
+  background-color:darkcyan;
+  color: #fff;
+}
+
+.btn-gray {
+  background-color: #6b7280; /* gris */
+  color: #fff;
+}
+
+.btn-icon {
+  width: 20px;
+  height: 20px;
+}

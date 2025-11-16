@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+
+
+enum EnqueteStatus {
+  draft
+  active
+  closed
+}
+
+
+
+enum QuestionType {
+  radio 
+  select
+  checkbox 
+  text
+  rating
+  yes_no
+}
+
+
+
+model Option {
+  id_option   String    @id @default(uuid())
+  text_option String
+  id_question String    // optionnel
+  question    Question  @relation(fields: [id_question], references: [id_question], onDelete: Cascade)
+}
+
+
+model Question {
+  id_question   String             @id @default(uuid())
+  text_question String
+  id_enquete    String
+  required      Boolean            @default(false)
+  options        Option[]
+  type          QuestionType
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  enquete       Enquete            @relation(fields: [id_enquete], references: [id_enquete], onDelete: Cascade)
+}
+
+
+
+
+model Enquete {
+  id_enquete   String     @id @default(uuid())
+  description  String
+  startDate    DateTime
+  endDate      DateTime
+  enquete_name String
+  status       EnqueteStatus @default(draft)
+  category     String
+  isPublish    Boolean   @default(false)   
+  questions    Question[]
+
+}
+
+model Admin {
+  id_admin String @id @default(uuid())
+  name     String
+  email    String @unique
+  password String
+}
+
+
+model Response {
+  id_response String   @id @default(uuid())
+  id_enquete  String
+  email       String
+  createdAt   DateTime    @default(now())
+  answers     Json     
+}
+
+
+
+
+model EmailList {
+  id_email  String      @id @default(uuid())
+  email     String      @unique
+  createdAt DateTime    @default(now())
+}

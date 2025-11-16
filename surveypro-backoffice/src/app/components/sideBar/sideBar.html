@@ -1,0 +1,38 @@
+<div class="sidebar" *ngIf="isLoggedIn" [class.response-mode]="isResponseMode">
+  <ul>
+    <li>
+      <button (click)="router.navigate(['/dashboard'])">
+        <i class="fa fa-envelope"></i>
+        <span *ngIf="!isResponseMode">Dashboard</span>
+      </button>
+    </li>
+    <li>
+      <button (click)="router.navigate(['/enquetes'])">
+        <i class="fa fa-list"></i>
+        <span *ngIf="!isResponseMode">Enquêtes</span>
+      </button>
+    </li>
+    <li>
+      <button (click)="router.navigate(['/emails'])">
+        <i class="fa fa-envelope"></i>
+        <span *ngIf="!isResponseMode">Emails</span>
+      </button>
+    </li>
+    <li *ngIf="!isResponseMode">
+      <button (click)="router.navigate(['/responses'])">
+        <i class="fa fa-reply-all"></i>
+        <span>Toutes les réponses</span>
+      </button>
+    </li>
+    
+    <hr *ngIf="!isResponseMode"/>
+    <li  *ngIf="!isResponseMode">
+      <button (click)="logout()"> Déconnexion </button>
+    </li>
+    <li  *ngIf="!isResponseMode">
+      <button (click)="openModal()"> Ajouter enquête </button>
+      <app-enquete-modal [(open)]="modalOpen"></app-enquete-modal>
+
+    </li>
+  </ul>
+</div>

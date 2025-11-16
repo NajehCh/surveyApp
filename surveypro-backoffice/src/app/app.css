@@ -1,0 +1,41 @@
+/* --- Layout principal --- */
+.layout {
+  display: flex;
+  min-height: calc(100vh - 60px); /* prend tout l’écran sauf navbar */
+}
+
+/* --- Sidebar --- */
+.sidebar {
+  width: 270px;
+  background: #f9fafb;
+  border-right: 1px solid #e5e7eb;
+  padding: 1rem;
+  transition: transform 0.3s ease;
+}
+
+/* --- Contenu principal --- */
+.content {
+  flex: 1;
+  padding: 1.5rem;
+  background: #ffffff;
+  overflow-y: auto;
+}
+
+/* --- Responsive --- */
+@media (max-width: 1200px) {
+  .layout {
+    flex-direction: column; /* sidebar passe au-dessus */
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .content {
+    padding: 1rem;
+  }
+}
+
+

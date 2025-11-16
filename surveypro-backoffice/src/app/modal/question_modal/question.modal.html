@@ -1,0 +1,92 @@
+<form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="question-form">
+  <!-- Header -->
+  <div class="form-header">
+    <div class="header-icon">
+      <span><fa-icon [icon]="faPlusCircle" class="text-blue-500"></fa-icon></span>
+    </div>
+    <div>
+      <h2 class="form-title">Ajouter une nouvelle question</h2>
+      <p class="form-description">
+        Créez une nouvelle question pour enrichir votre enquête
+      </p>
+    </div>
+  </div>
+
+
+   <!-- Texte de la question -->
+   <div class="form-group">
+    <label class="form-label">
+      Texte de la question <span class="required-star">*</span>
+    </label>
+    <input
+      type="text"
+      formControlName="text_question"
+      class="form-input"
+      placeholder="Saisissez votre question de manière claire et précise..."
+    />
+  </div>
+  <!-- Type de question et obligatoire -->
+  <div class="form-grid">
+    <div class="form-group form-checkbox">
+      <input type="checkbox" id="required" formControlName="required" />
+      <label for="required">Question obligatoire</label>
+    </div>
+    <div class="form-group">
+      <label class="form-label">
+        Type de question <span class="required-star">*</span>
+      </label>
+      <select formControlName="type" class="form-select">
+        <option value="multiple-choice">Choix multiple</option>
+        <option value="radio">Bouton radio</option>
+        <option value="checkbox">Cases à cocher</option>
+        <option value="select">Liste déroulante</option>
+        <option value="text">Texte libre</option>
+        <option value="rating">Notation (1-5)</option>
+        <option value="yes_no">Oui/Non</option>
+      </select>
+    </div>
+
+    
+</div>
+  
+  <!-- Options dynamiques -->
+  <div formArrayName="options" class="options-wrapper"
+       *ngIf="questionForm.get('type')?.value !== 'text' && questionForm.get('type')?.value !== 'rating'">
+    <label class="form-label">Options de réponse :</label>
+    <div *ngFor="let opt of optionControls.controls; let i = index" class="option-item">
+      <input type="text" [formControlName]="i" class="form-input option-input" />
+      <button type="button" class="option-delete" (click)="removeOption(i)">
+        <fa-icon [icon]="faX" class="text-blue-500"></fa-icon>
+      </button>
+    </div>
+
+    <!-- Ajouter une option -->
+    <button
+      type="button"
+      class="btn-add-option"
+      (click)="addOption()"
+      [disabled]="isClosed()"
+    >
+      ➕ Ajouter une option
+    </button>
+  </div>
+
+  <!-- Message si moins de 2 options -->
+  <div
+    *ngIf="['radio','checkbox','select'].includes(questionForm.get('type')?.value) && optionControls.length < 2"
+    class="warning-text"
+  >
+    ⚠️ Vous devez ajouter au moins 2 options.
+  </div>
+
+  <!-- Champ texte libre (disabled) -->
+  <div *ngIf="questionForm.get('type')?.value === 'text'">
+    <input type="text" class="form-input" placeholder="Réponse libre" disabled />
+  </div>
+
+  <!-- Submit -->
+  <button type="submit" class="btn-submit" [disabled]="isSubmitting || isClosed()">
+    {{ questionToEdit ? 'Mettre à jour' : 'Enregistrer' }}
+  </button>
+
+</form>

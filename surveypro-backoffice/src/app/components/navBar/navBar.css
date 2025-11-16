@@ -1,0 +1,85 @@
+body {
+  font-family: 'Great Vibes', cursive;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: darkcyan;
+  padding: 12px 20px;
+  height: auto;
+  color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Logo + titre --- */
+.logo-section {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  padding-left: 150px;
+  gap: 19px;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  font-size: 1.6rem;
+  padding: 15px;
+  margin-top: 15px;
+  font-family: 'Great Vibes', cursive;
+
+}
+
+/* --- Actions navbar --- */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-actions button {
+  background: white;
+  color: black;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.nav-actions button:hover {
+  background: #f3f4f6;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Responsive navbar --- */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    height: 100px;
+    margin-bottom: 70px;
+  }
+.logo-section{
+  padding-left: 0;
+}
+  .nav-actions {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .nav-actions button {
+    flex: 1;
+  }
+}
