@@ -1,0 +1,52 @@
+name: Build & Push Docker Images
+
+on:
+  push:
+    branches: 
+      - main
+
+jobs:
+  build_backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login GitHub registry
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GHCR_USERNAME }}" --password-stdin
+
+      - name: Build backend image
+        run: docker build -t ghcr.io/${{ secrets.GHCR_USERNAME }}/surveypro-backend:latest ./surveypro-backend
+
+      - name: Push backend
+        run: docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/surveypro-backend:latest
+
+  build_backoffice:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login GitHub registry
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GHCR_USERNAME }}" --password-stdin
+
+      - name: Build backoffice image
+        run: docker build -t ghcr.io/${{ secrets.GHCR_USERNAME }}/surveypro-backoffice:latest ./surveypro-backoffice
+
+      - name: Push backoffice
+        run: docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/surveypro-backoffice:latest
+
+  build_frontoffice:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login GitHub registry
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GHCR_USERNAME }}" --password-stdin
+
+      - name: Build frontoffice image
+        run: docker build -t ghcr.io/${{ secrets.GHCR_USERNAME }}/surveypro-frontoffice:latest ./surveypro-frontoffice
+
+      - name: Push frontoffice
+        run: docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/surveypro-frontoffice:latest
