@@ -13,13 +13,15 @@ spec:
       labels:
         app: backoffice
     spec:
+      imagePullSecrets:
+        - name: ghcr-secret
       containers:
         - name: backoffice
-          image: registry.gitlab.com/najehch/surveypro/backoffice:latest
+          image: ghcr.io/najehch/surveypro-backoffice:latest
           imagePullPolicy: Always
-          env: 
+          env:
             - name: API_URL
-              value: "http://127.0.0.1:35865/"
+              value: "http://backend-service.db-backend.svc.cluster.local:3000"
           ports:
             - containerPort: 4200
           resources:

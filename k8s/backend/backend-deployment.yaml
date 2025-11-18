@@ -13,13 +13,12 @@ spec:
       labels:
         app: backend
     spec:
-      nodeSelector : 
-        role: all
       imagePullSecrets:
-        - name: gitlab-registry-secret
+        - name: ghcr-secret
       containers:
         - name: backend
-          image: registry.gitlab.com/najehch/surveypro/backend:latest
+          image: ghcr.io/najehch/surveypro-backend:latest
+          imagePullPolicy: Always
           env:
             - name: JWT_SECRET
               value: "maSuperCleSecretea"
@@ -36,7 +35,7 @@ spec:
                   name: smtp-secret
                   key: SMTP_PASS
             - name: FRONTOFFICE_URL
-              value: "http://localhost:4209"
+              value: "https://surveyapp.tn"
           ports:
             - containerPort: 3000
           resources:
@@ -51,5 +50,5 @@ spec:
               mountPath: /app/data
       volumes:
         - name: backend-storage
-          persistentVolumeClaim:   
+          persistentVolumeClaim:
             claimName: backend-pvc
