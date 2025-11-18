@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontoffice-deployment
-  namespace: argocd
+  namespace: frontoffice
 spec:
   replicas: 1
   selector:
@@ -25,3 +25,5 @@ spec:
             limits:
               cpu: "300m"
               memory: "256Mi"
+      imagePullSecrets:
+        - name: ghcr-secret
