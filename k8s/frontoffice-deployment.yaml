@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontoffice-deployment
-  namespace: frontoffice
+  namespace: argocd
 spec:
   replicas: 1
   selector:
