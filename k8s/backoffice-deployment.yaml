@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backoffice-deployment
-  namespace: argocd
+  namespace: backoffice
 spec:
   replicas: 1
   selector:

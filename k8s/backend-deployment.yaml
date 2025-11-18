@@ -22,32 +22,32 @@ spec:
           env:
             - name: JWT_SECRET
               value: "maSuperCleSecretea"
+
             - name: DATABASE_URL
-              value: "postgresql://postgres:postgres@my-postgres:5432/enquetes"
+              value: "postgresql://postgres:postgres@my-postgres.db-backend.svc.cluster.local:5432/enquetes"
+
             - name: SMTP_USER
               valueFrom:
                 secretKeyRef:
                   name: smtp-secret
                   key: SMTP_USER
+
             - name: SMTP_PASS
               valueFrom:
                 secretKeyRef:
                   name: smtp-secret
                   key: SMTP_PASS
+
             - name: FRONTOFFICE_URL
               value: "https://surveyapp.tn"
+
           ports:
             - containerPort: 3000
-          resources:
-            requests:
-              cpu: "100m"
-              memory: "256Mi"
-            limits:
-              cpu: "500m"
-              memory: "512Mi"
+
           volumeMounts:
             - name: backend-storage
               mountPath: /app/data
+
       volumes:
         - name: backend-storage
           persistentVolumeClaim:

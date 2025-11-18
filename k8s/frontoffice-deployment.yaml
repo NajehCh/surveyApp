@@ -13,9 +13,15 @@ spec:
       labels:
         app: frontoffice
     spec:
+      imagePullSecrets:
+        - name: ghcr-secret
       containers:
         - name: frontoffice
           image: ghcr.io/najehch/surveypro-frontoffice:latest
+          imagePullPolicy: Always
+          env:
+            - name: API_URL
+              value: "http://backend-service.db-backend.svc.cluster.local:3000/"
           ports:
             - containerPort: 4209
           resources:
@@ -25,5 +31,3 @@ spec:
             limits:
               cpu: "500m"
               memory: "1Gi"
-      imagePullSecrets:
-        - name: ghcr-secret

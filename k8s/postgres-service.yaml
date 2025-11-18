@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: my-postgres
-  namespace: argocd
+  namespace: db-backend
 spec:
   selector:
     app: postgres
