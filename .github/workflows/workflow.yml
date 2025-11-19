@@ -1,8 +1,8 @@
-name: Build & Push Docker Images
+name: Build & Deploy SurveyPro
 
 on:
   push:
-    branches: 
+    branches:
       - main
 
 jobs:
@@ -10,43 +10,94 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Login GitHub registry
+      - name: Login to GHCR
         run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GHCR_USERNAME }}" --password-stdin
 
       - name: Build backend image
         run: docker build -t ghcr.io/${{ secrets.GHCR_USERNAME }}/surveypro-backend:latest ./surveypro-backend
 
-      - name: Push backend
+      - name: Push backend image
         run: docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/surveypro-backend:latest
+
 
   build_backoffice:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Login GitHub registry
+      - name: Login to GHCR
         run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GHCR_USERNAME }}" --password-stdin
 
       - name: Build backoffice image
         run: docker build -t ghcr.io/${{ secrets.GHCR_USERNAME }}/surveypro-backoffice:latest ./surveypro-backoffice
 
-      - name: Push backoffice
+      - name: Push backoffice image
         run: docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/surveypro-backoffice:latest
+
 
   build_frontoffice:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Login GitHub registry
+      - name: Login to GHCR
         run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GHCR_USERNAME }}" --password-stdin
 
       - name: Build frontoffice image
         run: docker build -t ghcr.io/${{ secrets.GHCR_USERNAME }}/surveypro-frontoffice:latest ./surveypro-frontoffice
 
-      - name: Push frontoffice
+      - name: Push frontoffice image
         run: docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/surveypro-frontoffice:latest
+
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build_backend, build_backoffice, build_frontoffice]
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Install kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
+
+      - name: Update kubeconfig
+        run: |
+          aws eks update-kubeconfig \
+            --region eu-central-1 \
+            --name survey-cluster
+
+      - name: Apply Kubernetes manifests
+        run: |
+        
+          kubectl apply -f k8s/postgres-deployment.yaml
+          kubectl apply -f k8s/postgres-service.yaml
+
+         
+          kubectl apply -f k8s/backend-pvc.yaml
+          kubectl apply -f k8s/backend-deployment.yaml
+          kubectl apply -f k8s/backend-service.yaml
+
+         
+          kubectl apply -f k8s/backoffice-deployment.yaml
+          kubectl apply -f k8s/backoffice-service.yaml
+
+          kubectl apply -f k8s/frontoffice-deployment.yaml
+          kubectl apply -f k8s/frontoffice-service.yaml
+
+         
+          kubectl apply -f k8s/ingress-backend.yaml

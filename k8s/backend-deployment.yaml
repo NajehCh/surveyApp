@@ -51,4 +51,4 @@ spec:
       volumes:
         - name: backend-storage
           persistentVolumeClaim:
-            claimName: backend-pvc
+            claimName: backend-pv
